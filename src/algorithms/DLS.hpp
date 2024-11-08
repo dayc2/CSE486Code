@@ -31,7 +31,14 @@ namespace DLS {
             }
             if (nodeDepth < 0) continue;
             // expand node
-            for (auto & [child, cost] : current->children) {
+            
+            // sort the children in alphabetical order
+            std::vector< std::pair<Node *, int> > children = current->children;
+            std::sort(children.begin(), children.end(), [](std::pair<Node *, int> a, std::pair<Node *, int> b) {
+                return a.first->name > b.first->name;
+            });
+
+            for (auto & [child, cost] : children) {
                 if (parents.find(child) == parents.end()) {
                     q.push_back( {child, currentCost+cost, nodeDepth-1} );
                     parents[child] = current;

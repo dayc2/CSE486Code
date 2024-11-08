@@ -3,21 +3,11 @@
 #include "../utils.h"
 #include <deque>
 #include <map>
-#include <queue>
 
 namespace DFS {
     int DFS(Node & n, Node & goal, std::list<Node *> * path = nullptr) {
         if (path != nullptr) { path->clear(); }
         std::deque< std::pair<Node *, int> > q { {&n, 0} };
-
-        // // use priority queue to get the nodes in alphabetical order
-        // struct compare {
-        //     bool operator()(std::pair<Node *, int> a, std::pair<Node *, int> b) {
-        //         return a.first->name > b.first->name;
-        //     }
-        // };
-        // std::priority_queue< std::pair<Node *, int>, std::vector<std::pair<Node *, int> >, compare > q;
-
         std::map< Node *, Node * > parents;
         parents [&n] = nullptr;
         while (!q.empty()) {
